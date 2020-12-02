@@ -4,14 +4,15 @@
   "description": "Tomato app backend",
   "main": "index.js",
   "scripts": {
-    
     "test": "mocha --require ts-node/register --watch-extensions ts 'test/*/.spec.ts' --timeout 150000"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/chai": "^4.2.14",
     "@types/chai-as-promised": "^7.1.3",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/mocha": "^8.0.4",
     "@types/mongoose": "^5.10.1",
     "chai": "^4.2.0",
@@ -21,7 +22,9 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.15"
   }
 }
