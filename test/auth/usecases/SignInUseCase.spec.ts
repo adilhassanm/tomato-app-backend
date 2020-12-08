@@ -30,7 +30,7 @@ describe("SingnInUseCase",()=>{
         //create fake repository,instead of using mocha
         repository = new FakeRepository()
         //fake password service
-        passwordService = new FakePasswordService()
+       // passwordService = new FakePasswordService()
         sut = new SignInUseCase(repository,passwordService)
     })
 

@@ -15,21 +15,24 @@ describe('AuthRepository',()=>{
     
     //setup hooks
 
-    beforeEach(()=>{
+    beforeEach( ()=>{
         //setup dependency
         client =new mongoose.Mongoose()
         const connectionStr = encodeURI(process.env.TEST_DB as string)//I want to environ variable to hold it instead of holding it here
-        client.connect(connectionStr,{
+          client.connect(connectionStr,{
             useNewUrlParser:true,
-            useUnifiedTopology:true
+            useUnifiedTopology:true,
+            connectTimeoutMS: 15000
             
-                    })
+                    }).catch((err) => {
+                        console.log(err)
+                    })//.then((co) => console.log(co))
 
         sut = new AuthRepository(client)
                 })
 
-    afterEach(() =>{
-        client.disconnect()
+    afterEach( () =>{
+       client.disconnect().catch(() => null)
     })
 
     it('should return user when email is found',async ()=>{
@@ -47,20 +50,27 @@ describe('AuthRepository',()=>{
     it("should return user id when added to db",async ()=>{
         //arrange
         const user={
-            name:"Alayna",
-            email:"alayna@gmail.com",
-            password:"password123",
+            name:"Adil",
+            email:"adil27jan@gmail.com",
+            password:"password1234",
             type:"email",
         }
         //act
         const result = await sut.add(
             user.name,
             user.email,
-            user.password,
-            user.type
-        )
-        //assert
+            user.type,
+            user.password
+        )//assert
         expect(result).to.not.be.empty
-    })
+    }).timeout(15000) 
+    //Due to the internet connection speed the test 
+    //timeouts before the record is written to MongoDB
+    //and closes the connection. That is why the records 
+    //weren't written to the db. The code works but the timeout
+    //kills it before its completed. Had to increase the timeout 
+    //on the test. 
+    //wow it worked,i am sorry for the internent speed
+
     
     })
