@@ -22,7 +22,7 @@ describe('AuthRepository',()=>{
           client.connect(connectionStr,{
             useNewUrlParser:true,
             useUnifiedTopology:true,
-            connectTimeoutMS: 15000
+            connectTimeoutMS: 25000
             
                     }).catch((err) => {
                         console.log(err)
@@ -37,22 +37,22 @@ describe('AuthRepository',()=>{
 
     it('should return user when email is found',async ()=>{
         //arrange
-        const email = 'adil27jan@gmail.com'
-        const password="adil1234"
+        const email = "ADIL37jan@gmail.com"
+        const password="password123456"
         //act
         const result = await sut.find1(email)
 
         //assert
         expect(result).to.not.be.empty
 
-    })
+    }).timeout(25000)
 
     it("should return user id when added to db",async ()=>{
         //arrange
         const user={
-            name:"Adil",
-            email:"adil27jan@gmail.com",
-            password:"password1234",
+            name:"Adilhassan",
+            email:"adil57jan@gmail.com",
+            password:"password123456789",
             type:"email",
         }
         //act
@@ -63,7 +63,7 @@ describe('AuthRepository',()=>{
             user.password
         )//assert
         expect(result).to.not.be.empty
-    }).timeout(15000) 
+    }).timeout(25000) 
     //Due to the internet connection speed the test 
     //timeouts before the record is written to MongoDB
     //and closes the connection. That is why the records 
@@ -71,6 +71,8 @@ describe('AuthRepository',()=>{
     //kills it before its completed. Had to increase the timeout 
     //on the test. 
     //wow it worked,i am sorry for the internent speed
+
+    //default timer was 2 sec(2000ms),extend timing by putting .timeout(25000) to get extended timing
 
     
     })

@@ -12,9 +12,12 @@ chai.use(chaiAsPromised)
 //to do our test we use describe from mocha
 
 describe("SingnInUseCase",()=>{
-    let sut: SignInUseCase
+    //global test dependency variables
+    let sut: SignInUseCase  //system under test
     let repository: IAuthRepository
     let passwordService: IPasswordService
+    //create a user object
+
 
     const user ={
         email: "adil27jan@gmail.com",
@@ -25,12 +28,13 @@ describe("SingnInUseCase",()=>{
 
     }
 
-    //before each we need to prepare dependencies
+    //before each we need to prepare /configure dependencies
+
     beforeEach(()=>{
-        //create fake repository,instead of using mocha
+        //create fake repository,
         repository = new FakeRepository()
         //fake password service
-       // passwordService = new FakePasswordService()
+       passwordService = new FakePasswordService()
         sut = new SignInUseCase(repository,passwordService)
     })
 
@@ -40,7 +44,7 @@ describe("SingnInUseCase",()=>{
 
         const user={email:'wrong@email.com',password:"1234"}
         //assert
-        await expect(sut.execute(user.email,user.password)).to.be.rejectedWith('User not found')
+        await expect(sut.execute(user.email,user.password)).to.be.rejectedWith('User not found') //execute is the core method of finding given email in the repository,and check password provided correct or not and then provide userid   
 
     })
 

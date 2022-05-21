@@ -1,4 +1,4 @@
-//abstraction of password services and implementation will be later
+//application service abstraction - will be later implemented in our infra/data layer,abstraction of password services and implementation will be later
 //will use library bcrypt for hashing and comparison
 
 export  default interface IPasswordService {

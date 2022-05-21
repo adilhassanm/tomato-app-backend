@@ -5,7 +5,7 @@ export default class JwtTokenService implements ITokenService{
     constructor(private readonly privateKey:string){}
     encode(payload: string | object): string | object {
        
-        let token = jwt.sign({data:payload},this.privateKey,{issuer:'com.fodapp',expiresIn:'1h'})
+        let token = jwt.sign({data:payload},this.privateKey,{issuer:'com.foodapp',expiresIn:'1h'})
         return token
     }
     decode(token: string ): string | object {//token cannot be object but a string
