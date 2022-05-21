@@ -21,16 +21,19 @@ export default class AuthController{
         //we will use these objects to fetch our parameters from our request and also to return a parameter from our response
         //between atry catch
         try{
-            const {email1,password} = req.body
+            const {email1,password} = req.body  //typical way of parsng and getting request body's usual parameters of username and password
             return this.signInUseCase.execute(email1,password)
             .then((id:String)=>res.status(200).json({auth_token:this.tokenService.encode(id)}))
             .catch((err:Error)=>res.status(404).json({error:err.message}))
         
         }
         catch(err){
+            return res.status(400).json({error:err})
 
         }
 
+        //there we have ur signin method that will be executed on our controller
+        //whenever user requests a signin rout
         
 
 
