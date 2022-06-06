@@ -17,6 +17,7 @@ export default class FakeRespitory implements IAuthRepository{
             name:'Alayna',
             password:"",
             type:"google",
+            
             },
 
     ]
